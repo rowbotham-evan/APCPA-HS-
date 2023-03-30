@@ -1,0 +1,73 @@
+//INTRO SCREEN WHERE THE USER CLICKS START BUTTON AND THE INTRO ANNIMATION IS DISPLAYED
+
+// imports
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.awt.Color;
+public class IntroScreen extends JFrame implements ActionListener, KeyListener
+{
+  // Globals
+ JFrame frame = new JFrame();
+ JButton introStartButton = new JButton(" → Enter Game → ");
+	Toolkit tk;
+  Image introBackground;
+	final int borderLeft = 0;
+  final int borderRight = 1010;
+  final int borderTop = 0;
+  final int borderBottom = 850;
+	ImageIcon finalIntro;
+	JLabel introduction;
+
+  /* Grapical design of the intro screen, including all the components  */ 
+ public IntroScreen()
+	{
+  tk = Toolkit.getDefaultToolkit();
+	Color yuvinatorPurple = new Color(153, 0, 255);
+	Color yuvinatorDonut = new Color(255, 202, 128);
+	frame.addKeyListener(this);
+	introBackground = tk.getImage("IntroGif.gif");
+  introStartButton.setBounds(350, 160, 300, 40);
+  introStartButton.setFocusable(true);
+  introStartButton.addActionListener(this);
+	introStartButton.setBackground(yuvinatorPurple);
+	introStartButton.setForeground(yuvinatorDonut);
+	introStartButton.setFont(new Font(null, Font.BOLD, 25));
+  frame.add(introStartButton);
+  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  frame.setSize(1000, 1000);
+  frame.setLayout(null);
+  frame.setVisible(true);
+	frame.getContentPane().setBackground(Color.BLACK);
+	finalIntro = new ImageIcon("IntroGif.gif");
+	introduction = new JLabel(finalIntro);
+	introduction.setBounds(0, 0, 1000, 1000);
+	frame.add(introduction);
+
+ }
+	/* Two potential inputs to move to next screen */  
+  // Clicking the intro start button 
+ 	public void actionPerformed(ActionEvent e)
+	{
+		if(e.getSource() == introStartButton)
+		{
+			frame.dispose();
+			SelectionScreen ss = new SelectionScreen();
+			System.out.println("New Screen");
+		}
+	}
+	
+	public void keyReleased(KeyEvent e){}
+  public void keyTyped(KeyEvent e){}
+  public void keyPressed(KeyEvent e)
+  {
+    // Hitting the right arrow key to continue
+    if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+    {
+			frame.dispose();
+      IntroScreen introScreen = new IntroScreen();
+      System.out.println("Works 2");
+    }   
+	}
+}
